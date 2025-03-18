@@ -1,13 +1,11 @@
 package com.hiring.presentation
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
@@ -20,14 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.interview.hiring.R
 import androidx.compose.material3.MaterialTheme.colorScheme as colors
 
 @Composable
 fun ItemsScreenRoot(
     modifier: Modifier = Modifier,
-    viewModel: ItemsViewModel = viewModel()
+    viewModel: ItemsViewModel
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -37,7 +34,6 @@ fun ItemsScreenRoot(
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ItemsScreen(
     state: UiState,
@@ -72,25 +68,7 @@ fun ItemsScreen(
             modifier = modifier.fillMaxSize(),
             state = rememberLazyListState()
         ) {
-            state.itemsMap.forEach { (listId, items) ->
-                stickyHeader {
-                    HeaderRow(listId.toString())
-                }
-                val lastItem = items.lastOrNull()
-                items(
-                    items = items,
-                    key = {
-                        it.id
-                    }
-                ) { item ->
-                    item.name?.let { name ->
-                        NameRow(
-                            name = name,
-                            isLastName = name == lastItem?.name
-                        )
-                    }
-                }
-            }
+           // TODO
         }
     }
 }
